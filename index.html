@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalaakaari — Creative Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Yatra+One&family=Big+Shoulders+Display:wght@900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────────── -->
+  <nav class="nav" id="navbar">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">kalaakaari</a>
+      <ul class="nav__links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#portfolio">Work</a></li>
+        <li><a href="#contact" class="nav__cta">Let's Talk</a></li>
+      </ul>
+      <button class="nav__burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── Graph-lines background overlay ─────────────── -->
+  <div class="graph-bg" aria-hidden="true"></div>
+
+  <!-- ─── HERO ─────────────────────────────────────────── -->
+  <section class="hero" id="home">
+<div class="hero__content">
+      <p class="hero__eyebrow">Delhi-based Creative Agency</p>
+      <h1 class="hero__headline">
+        <div class="hero__pressure-wrap" id="heroPressure"></div>
+        <span class="hero__brand"><span class="hero__brand-deva">कला</span><span class="hero__brand-latin">KAARI</span></span>
+      </h1>
+      <p class="hero__tagline">turning brainstorms into rainbows <em>&amp; profits</em></p>
+      <div class="hero__actions">
+        <a href="#portfolio" class="btn btn--primary">See Our Work</a>
+        <a href="#contact" class="btn btn--ghost">Get In Touch</a>
+      </div>
+    </div>
+    <!-- MagnetLines decoration in hero -->
+    <div id="magnetLinesHero" class="hero__magnet" aria-hidden="true"></div>
+
+    <div class="hero__scroll-hint">
+      <div class="hero__scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- ─── MARQUEE ──────────────────────────────────────── -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Ad Production</span><span class="dot">·</span>
+      <span>Social Media</span><span class="dot">·</span>
+      <span>Branding</span><span class="dot">·</span>
+      <span>Animation</span><span class="dot">·</span>
+      <span>Content</span><span class="dot">·</span>
+      <span>Marketing</span><span class="dot">·</span>
+      <span>Ad Production</span><span class="dot">·</span>
+      <span>Social Media</span><span class="dot">·</span>
+      <span>Branding</span><span class="dot">·</span>
+      <span>Animation</span><span class="dot">·</span>
+      <span>Content</span><span class="dot">·</span>
+      <span>Marketing</span><span class="dot">·</span>
+    </div>
+  </div>
+
+  <!-- ─── CURVED LOOP ─────────────────────────────────── -->
+  <div id="curvedLoopWrap" aria-hidden="true"></div>
+
+  <!-- ─── SERVICES ─────────────────────────────────────── -->
+  <section class="section services" id="services">
+    <div class="container">
+      <div class="section__header reveal">
+        <p class="section__label">What We Do</p>
+        <h2 class="section__title">Our Services</h2>
+      </div>
+      <div class="services__list">
+        <div class="service-row reveal">
+          <span class="service-row__num">01</span>
+          <h3 class="service-row__name">Ad Production</h3>
+          <p class="service-row__desc">High-impact ad creatives that stop the scroll and drive action.</p>
+        </div>
+        <div class="service-row reveal">
+          <span class="service-row__num">02</span>
+          <h3 class="service-row__name">Social Media Management</h3>
+          <p class="service-row__desc">Strategy, scheduling, and community building across all platforms.</p>
+        </div>
+        <div class="service-row reveal">
+          <span class="service-row__num">03</span>
+          <h3 class="service-row__name">Scripting</h3>
+          <p class="service-row__desc">Compelling scripts for reels, ads, and video content that convert.</p>
+        </div>
+        <div class="service-row reveal">
+          <span class="service-row__num">04</span>
+          <h3 class="service-row__name">Content Production</h3>
+          <p class="service-row__desc">End-to-end content creation — photography, video, and more.</p>
+        </div>
+        <div class="service-row reveal">
+          <span class="service-row__num">05</span>
+          <h3 class="service-row__name">Graphic Designing</h3>
+          <p class="service-row__desc">Visual identities and assets that make your brand unforgettable.</p>
+        </div>
+        <div class="service-row reveal">
+          <span class="service-row__num">06</span>
+          <h3 class="service-row__name">Branding &amp; Animation</h3>
+          <p class="service-row__desc">Motion graphics and brand systems that bring your story to life.</p>
+        </div>
+        <div class="service-row reveal">
+          <span class="service-row__num">07</span>
+          <h3 class="service-row__name">Performance Marketing</h3>
+          <p class="service-row__desc">Data-driven campaigns optimised for measurable ROI.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── INDUSTRIES ───────────────────────────────────── -->
+  <section class="section industries" id="industries">
+    <div class="container">
+      <div class="section__header reveal">
+        <p class="section__label">Where We Excel</p>
+        <h2 class="section__title">Industries We Serve</h2>
+      </div>
+      <div id="industriesList" class="reveal"></div>
+    </div>
+  </section>
+
+  <!-- ─── PORTFOLIO ────────────────────────────────────── -->
+  <section class="section portfolio" id="portfolio">
+    <div class="container">
+      <div class="section__header reveal">
+        <p class="section__label">Our Work</p>
+        <div id="trueFocusWrap"></div>
+      </div>
+      <div class="portfolio__grid">
+        <div class="portfolio-card reveal">
+          <div class="portfolio-card__thumb" style="background:#c8a882;"></div>
+          <div class="portfolio-card__info">
+            <div>
+              <span class="portfolio-card__tag">Branding</span>
+              <h4>Project Name</h4>
+            </div>
+            <span class="portfolio-card__arrow">↗</span>
+          </div>
+        </div>
+        <div class="portfolio-card reveal">
+          <div class="portfolio-card__thumb" style="background:#a07850;"></div>
+          <div class="portfolio-card__info">
+            <div>
+              <span class="portfolio-card__tag">Social Media</span>
+              <h4>Project Name</h4>
+            </div>
+            <span class="portfolio-card__arrow">↗</span>
+          </div>
+        </div>
+        <div class="portfolio-card reveal">
+          <div class="portfolio-card__thumb" style="background:#89482a;"></div>
+          <div class="portfolio-card__info">
+            <div>
+              <span class="portfolio-card__tag">Ad Production</span>
+              <h4>Project Name</h4>
+            </div>
+            <span class="portfolio-card__arrow">↗</span>
+          </div>
+        </div>
+        <div class="portfolio-card reveal">
+          <div class="portfolio-card__thumb" style="background:#4a3931;"></div>
+          <div class="portfolio-card__info">
+            <div>
+              <span class="portfolio-card__tag">Content</span>
+              <h4>Project Name</h4>
+            </div>
+            <span class="portfolio-card__arrow">↗</span>
+          </div>
+        </div>
+        <div class="portfolio-card reveal">
+          <div class="portfolio-card__thumb" style="background:#c8a882;"></div>
+          <div class="portfolio-card__info">
+            <div>
+              <span class="portfolio-card__tag">Animation</span>
+              <h4>Project Name</h4>
+            </div>
+            <span class="portfolio-card__arrow">↗</span>
+          </div>
+        </div>
+        <div class="portfolio-card reveal">
+          <div class="portfolio-card__thumb" style="background:#a07850;"></div>
+          <div class="portfolio-card__info">
+            <div>
+              <span class="portfolio-card__tag">Marketing</span>
+              <h4>Project Name</h4>
+            </div>
+            <span class="portfolio-card__arrow">↗</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ──────────────────────────────────────── -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="contact__inner">
+        <div class="contact__left reveal">
+          <p class="section__label">Say Hello</p>
+          <h2 class="contact__title">Let's build something<br /><span>amazing together.</span></h2>
+          <div class="contact__details">
+            <a href="mailto:business@kalaakaari.in" class="contact__link">
+              <span class="contact__link-label">Email</span>
+              business@kalaakaari.in
+            </a>
+            <a href="tel:+919582828371" class="contact__link">
+              <span class="contact__link-label">Phone</span>
+              +91 95828-28371
+            </a>
+            <div class="contact__link">
+              <span class="contact__link-label">Location</span>
+              Delhi, India
+            </div>
+          </div>
+        </div>
+        <form class="contact__form reveal" id="contactForm">
+          <div class="form-group">
+            <input type="text" id="name" placeholder="Your Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" placeholder="Email Address" required />
+          </div>
+          <div class="form-group">
+            <select id="service">
+              <option value="" disabled selected>Service Interested In</option>
+              <option>Ad Production</option>
+              <option>Social Media Management</option>
+              <option>Scripting</option>
+              <option>Content Production</option>
+              <option>Graphic Designing</option>
+              <option>Branding &amp; Animation</option>
+              <option>Performance Marketing</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea id="message" rows="4" placeholder="Tell us about your project"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__logo">kalaakaari</p>
+        <p class="footer__copy">© 2025 Kalaakaari. All rights reserved.</p>
+        <div class="footer__socials">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="LinkedIn">LI</a>
+          <a href="#" aria-label="Behance">BE</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/AnimatedList.js"></script>
+  <script src="js/TextPressure.js"></script>
+  <script src="js/CurvedLoop.js"></script>
+  <script src="js/TrueFocus.js"></script>
+  <script src="js/MagnetLines.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/SplashCursor.js"></script>
+</body>
+</html>
