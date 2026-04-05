@@ -6,7 +6,7 @@
   <title>Kalaakaari — Creative Agency</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Yatra+One&family=Big+Shoulders+Display:wght@900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Yatra+One&family=Big+Shoulders+Display:wght@900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -19,6 +19,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#industries">Industries</a></li>
         <li><a href="#portfolio">Work</a></li>
+        <li><a href="#delhi">Relive Delhi</a></li>
         <li><a href="#contact" class="nav__cta">Let's Talk</a></li>
       </ul>
       <button class="nav__burger" id="burger" aria-label="Menu">
@@ -27,8 +28,10 @@
     </div>
   </nav>
 
-  <!-- ─── Graph-lines background overlay ─────────────── -->
-  <div class="graph-bg" aria-hidden="true"></div>
+  <!-- ─── Graph-lines background (tricolor animated) ─── -->
+  <div class="graph-bg graph-bg--saffron" aria-hidden="true"></div>
+  <div class="graph-bg graph-bg--white"   aria-hidden="true"></div>
+  <div class="graph-bg graph-bg--green"   aria-hidden="true"></div>
 
   <!-- ─── HERO ─────────────────────────────────────────── -->
   <section class="hero" id="home">
@@ -38,7 +41,15 @@
         <div class="hero__pressure-wrap" id="heroPressure"></div>
         <span class="hero__brand"><span class="hero__brand-deva">कला</span><span class="hero__brand-latin">KAARI</span></span>
       </h1>
-      <p class="hero__tagline">turning brainstorms into rainbows <em>&amp; profits</em></p>
+      <p class="hero__tagline"><span class="hero__tagline-hindi">कलाकार बनो, मिस्त्री नहीं</span> <em>— Be an Artist, Not a Laborer</em></p>
+      <div class="hero__vibes">
+        <span class="vibe-pill">Culture</span>
+        <span class="vibe-pill">Rap</span>
+        <span class="vibe-pill">Chai Sutta</span>
+        <span class="vibe-pill">Food</span>
+        <span class="vibe-pill">Art is Not a Crime</span>
+        <span class="vibe-pill">Delhi</span>
+      </div>
       <div class="hero__actions">
         <a href="#portfolio" class="btn btn--primary">See Our Work</a>
         <a href="#contact" class="btn btn--ghost">Get In Touch</a>
@@ -200,6 +211,130 @@
             <span class="portfolio-card__arrow">↗</span>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RELIVE DELHI ─────────────────────────────────── -->
+  <section class="section delhi-section" id="delhi">
+    <div class="container">
+      <div class="section__header reveal">
+        <p class="section__label">Explore the City</p>
+        <h2 class="section__title">Relive <span class="accent-saffron">Delhi</span></h2>
+        <p class="delhi-section__sub">Hover a marker — unlock the mission</p>
+      </div>
+      <div class="delhi-map-wrap reveal">
+        <div class="delhi-map-legend">
+          <span><i class="legend-dot" style="background:#138808"></i>Landmarks</span>
+          <span><i class="legend-dot" style="background:#FF9933"></i>Hub</span>
+          <span><i class="legend-dot" style="background:#ffcc1e"></i>Yellow Line</span>
+          <span><i class="legend-dot" style="background:#1e78dc"></i>Blue Line</span>
+          <span><i class="legend-dot" style="background:#dc1e1e"></i>Red Line</span>
+        </div>
+        <svg class="delhi-map" viewBox="0 0 900 580" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background -->
+          <rect width="900" height="580" fill="#080C18" rx="12"/>
+          <!-- Coordinates badge -->
+          <text x="22" y="30" fill="rgba(245,230,200,0.35)" font-size="11" font-family="'Space Grotesk',monospace" letter-spacing="0.1em">28.614°N  77.209°E</text>
+          <text x="878" y="30" fill="rgba(245,230,200,0.35)" font-size="11" font-family="'Space Grotesk',monospace" text-anchor="end">NEW DELHI · INDIA</text>
+          <line x1="22" y1="42" x2="878" y2="42" stroke="rgba(245,230,200,0.07)" stroke-width="1"/>
+          <!-- Yamuna River -->
+          <path d="M718,48 Q748,120 728,210 Q708,300 726,390 Q744,480 716,545" fill="rgba(12,45,120,0.55)" stroke="rgba(25,90,200,0.55)" stroke-width="22" stroke-linecap="round"/>
+          <!-- Outer Ring Road -->
+          <ellipse cx="420" cy="305" rx="345" ry="215" fill="none" stroke="rgba(245,230,200,0.11)" stroke-width="5"/>
+          <!-- Inner Ring -->
+          <ellipse cx="425" cy="298" rx="172" ry="112" fill="none" stroke="rgba(245,230,200,0.08)" stroke-width="3"/>
+          <!-- Connaught Place rings -->
+          <circle cx="420" cy="290" r="32" fill="rgba(255,153,51,0.06)" stroke="rgba(255,153,51,0.28)" stroke-width="2"/>
+          <circle cx="420" cy="290" r="20" fill="rgba(255,153,51,0.04)" stroke="rgba(255,153,51,0.18)" stroke-width="1.5"/>
+          <!-- Kartavya Path (Rajpath) E-W boulevard -->
+          <line x1="420" y1="290" x2="688" y2="290" stroke="rgba(245,230,200,0.22)" stroke-width="4"/>
+          <!-- Main N-S road -->
+          <line x1="420" y1="50" x2="420" y2="540" stroke="rgba(245,230,200,0.09)" stroke-width="2.5"/>
+          <!-- NH48 Delhi-Gurgaon -->
+          <line x1="385" y1="335" x2="118" y2="565" stroke="rgba(245,230,200,0.1)" stroke-width="3.5"/>
+          <!-- E-W secondary roads -->
+          <line x1="75" y1="178" x2="706" y2="178" stroke="rgba(245,230,200,0.055)" stroke-width="1.5"/>
+          <line x1="75" y1="405" x2="706" y2="405" stroke="rgba(245,230,200,0.055)" stroke-width="1.5"/>
+          <line x1="75" y1="450" x2="680" y2="450" stroke="rgba(245,230,200,0.04)" stroke-width="1"/>
+          <!-- Diagonal radials from CP -->
+          <line x1="420" y1="290" x2="658" y2="158" stroke="rgba(245,230,200,0.07)" stroke-width="2"/>
+          <line x1="420" y1="290" x2="638" y2="455" stroke="rgba(245,230,200,0.07)" stroke-width="2"/>
+          <line x1="420" y1="290" x2="195" y2="455" stroke="rgba(245,230,200,0.07)" stroke-width="2"/>
+          <line x1="420" y1="290" x2="215" y2="138" stroke="rgba(245,230,200,0.07)" stroke-width="2"/>
+          <!-- N-S secondary roads -->
+          <line x1="300" y1="115" x2="300" y2="530" stroke="rgba(245,230,200,0.04)" stroke-width="1"/>
+          <line x1="535" y1="95" x2="535" y2="505" stroke="rgba(245,230,200,0.04)" stroke-width="1"/>
+          <line x1="628" y1="80" x2="628" y2="460" stroke="rgba(245,230,200,0.04)" stroke-width="1"/>
+          <!-- Metro lines -->
+          <path d="M128,162 Q280,176 420,170 Q545,164 688,148" fill="none" stroke="rgba(255,204,30,0.55)" stroke-width="2.5" stroke-dasharray="7,3"/>
+          <path d="M48,335 Q248,312 420,308 Q582,302 808,328" fill="none" stroke="rgba(30,120,220,0.55)" stroke-width="2.5" stroke-dasharray="7,3"/>
+          <path d="M420,52 Q428,168 420,290 Q412,398 420,532" fill="none" stroke="rgba(220,30,30,0.55)" stroke-width="2.5" stroke-dasharray="7,3"/>
+          <path d="M98,445 Q248,432 378,425 Q482,418 598,432" fill="none" stroke="rgba(128,48,200,0.5)" stroke-width="2.5" stroke-dasharray="7,3"/>
+          <!-- Scale bar -->
+          <line x1="28" y1="548" x2="128" y2="548" stroke="rgba(245,230,200,0.35)" stroke-width="1.5"/>
+          <line x1="28" y1="542" x2="28" y2="554" stroke="rgba(245,230,200,0.35)" stroke-width="1.5"/>
+          <line x1="128" y1="542" x2="128" y2="554" stroke="rgba(245,230,200,0.35)" stroke-width="1.5"/>
+          <text x="78" y="562" fill="rgba(245,230,200,0.35)" font-size="10" text-anchor="middle" font-family="'Space Grotesk',monospace">5 km</text>
+
+          <!-- ── LANDMARK MARKERS ── -->
+          <!-- India Gate -->
+          <g class="gta-marker">
+            <circle cx="648" cy="290" r="22" class="marker-pulse" style="animation-delay:0s"/>
+            <circle cx="648" cy="290" r="8" class="marker-dot"/>
+            <text x="648" y="270" class="marker-label" text-anchor="middle">India Gate</text>
+            <text x="648" y="258" class="marker-sublabel" text-anchor="middle">★ Main Mission</text>
+          </g>
+          <!-- Red Fort -->
+          <g class="gta-marker">
+            <circle cx="632" cy="162" r="20" class="marker-pulse" style="animation-delay:0.6s"/>
+            <circle cx="632" cy="162" r="7" class="marker-dot"/>
+            <text x="632" y="142" class="marker-label" text-anchor="middle">Red Fort</text>
+            <text x="632" y="130" class="marker-sublabel" text-anchor="middle">◆ Lal Qila</text>
+          </g>
+          <!-- Connaught Place (Gold / Hub) -->
+          <g class="gta-marker gta-marker--hub">
+            <circle cx="420" cy="290" r="26" class="marker-pulse marker-pulse--gold" style="animation-delay:1.2s"/>
+            <circle cx="420" cy="290" r="9" class="marker-dot marker-dot--gold"/>
+            <text x="420" y="268" class="marker-label" text-anchor="middle">Connaught Place</text>
+            <text x="420" y="256" class="marker-sublabel" text-anchor="middle">⬡ The Hub</text>
+          </g>
+          <!-- Chandni Chowk -->
+          <g class="gta-marker">
+            <circle cx="575" cy="170" r="19" class="marker-pulse" style="animation-delay:0.3s"/>
+            <circle cx="575" cy="170" r="7" class="marker-dot"/>
+            <text x="575" y="150" class="marker-label" text-anchor="middle">Chandni Chowk</text>
+            <text x="575" y="138" class="marker-sublabel" text-anchor="middle">★ Old Delhi Chaos</text>
+          </g>
+          <!-- Akshardham -->
+          <g class="gta-marker">
+            <circle cx="678" cy="215" r="18" class="marker-pulse" style="animation-delay:0.9s"/>
+            <circle cx="678" cy="215" r="6" class="marker-dot"/>
+            <text x="678" y="196" class="marker-label" text-anchor="middle">Akshardham</text>
+            <text x="678" y="184" class="marker-sublabel" text-anchor="middle">✦ Temple</text>
+          </g>
+          <!-- Qutub Minar -->
+          <g class="gta-marker">
+            <circle cx="308" cy="480" r="20" class="marker-pulse" style="animation-delay:1.5s"/>
+            <circle cx="308" cy="480" r="7" class="marker-dot"/>
+            <text x="308" y="460" class="marker-label" text-anchor="middle">Qutub Minar</text>
+            <text x="308" y="448" class="marker-sublabel" text-anchor="middle">◆ Ancient Grounds</text>
+          </g>
+          <!-- Lotus Temple -->
+          <g class="gta-marker">
+            <circle cx="530" cy="415" r="18" class="marker-pulse" style="animation-delay:1.8s"/>
+            <circle cx="530" cy="415" r="6" class="marker-dot"/>
+            <text x="530" y="396" class="marker-label" text-anchor="middle">Lotus Temple</text>
+            <text x="530" y="384" class="marker-sublabel" text-anchor="middle">✦ Icon</text>
+          </g>
+          <!-- Hauz Khas -->
+          <g class="gta-marker">
+            <circle cx="355" cy="418" r="18" class="marker-pulse" style="animation-delay:2.1s"/>
+            <circle cx="355" cy="418" r="6" class="marker-dot"/>
+            <text x="355" y="399" class="marker-label" text-anchor="middle">Hauz Khas</text>
+            <text x="355" y="387" class="marker-sublabel" text-anchor="middle">◈ Vibe Zone</text>
+          </g>
+        </svg>
       </div>
     </div>
   </section>

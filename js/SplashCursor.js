@@ -405,14 +405,18 @@
     return {r,g,b};
   }
 
-  /* ── Yellow/gold color generator ────────────────────── */
+  /* ── Indian tricolor generator ─────────────────────── */
+  // Cycles Saffron → White → Green (Indian flag palette)
+  let _colorIdx = 0;
+  const _tricolor = [
+    { r: 1.0,  g: 0.60, b: 0.20 }, // Saffron  #FF9933
+    { r: 0.96, g: 0.90, b: 0.78 }, // Warm white (cream)
+    { r: 0.07, g: 0.53, b: 0.03 }, // India Green #138808
+  ];
   function generateColor() {
-    // Hue range 30°–55° → amber/gold palette matching brand #d4a853
-    const h = (30 + Math.random() * 25) / 360;
-    const s = 0.75 + Math.random() * 0.25;
-    let c = HSVtoRGB(h, s, 1.0);
-    c.r *= 0.15; c.g *= 0.15; c.b *= 0.15;
-    return c;
+    const base = _tricolor[_colorIdx % 3];
+    _colorIdx++;
+    return { r: base.r * 0.15, g: base.g * 0.15, b: base.b * 0.15 };
   }
 
   function wrap(v, min, max) { const r=max-min; return r===0?min:((v-min)%r)+min; }
