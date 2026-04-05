@@ -687,6 +687,27 @@ ul { list-style: none; }
 }
 .footer__socials a:hover { color: var(--accent); }
 
+/* ── Language Toggle Button ────────────────────────────── */
+.nav__lang-toggle {
+  background    : transparent;
+  border        : 1px solid rgba(255,153,51,.38);
+  color         : var(--accent);
+  font-size     : .78rem;
+  font-weight   : 700;
+  letter-spacing: .06em;
+  padding       : .32rem .85rem;
+  border-radius : 100px;
+  cursor        : pointer;
+  transition    : background .2s, border-color .2s, color .2s;
+  font-family   : var(--font);
+  white-space   : nowrap;
+  flex-shrink   : 0;
+}
+.nav__lang-toggle:hover {
+  background   : rgba(255,153,51,.12);
+  border-color : var(--accent);
+}
+
 /* ── Animated tricolor graph-lines background ──────────── */
 .graph-bg {
   position: fixed;
@@ -940,6 +961,7 @@ ul { list-style: none; }
 
 @media (max-width: 768px) {
   .nav__links { display: none; }
+  .nav__lang-toggle { order: -1; }
   .nav__links.open {
     display: flex;
     flex-direction: column;
