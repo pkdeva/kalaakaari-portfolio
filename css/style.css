@@ -747,7 +747,6 @@ ul { list-style: none; }
 /* ── CurvedLoop ────────────────────────────────────────── */
 .curved-loop-jacket {
   width: 100%;
-  overflow: hidden;
   background: var(--bg-2);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
@@ -758,8 +757,7 @@ ul { list-style: none; }
   -webkit-user-select: none;
   -moz-user-select: none;
   width: 100%;
-  aspect-ratio: 100 / 12;
-  overflow: visible;
+  height: auto;
   display: block;
 }
 

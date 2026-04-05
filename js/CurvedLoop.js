@@ -24,7 +24,7 @@ class CurvedLoop {
 
     this.svg = document.createElementNS(ns, 'svg');
     this.svg.setAttribute('class', 'curved-loop-svg');
-    this.svg.setAttribute('viewBox', '0 0 1440 120');
+    this.svg.setAttribute('viewBox', `0 0 1440 ${this.curveAmount + 60}`);
     this.svg.style.visibility = 'hidden';
 
     // Hidden measure element
