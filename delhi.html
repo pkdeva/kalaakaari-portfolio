@@ -1,259 +1,448 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Relive Delhi — Kalaakaari</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Yatra+One&display=swap" rel="stylesheet" />
-  <!-- Leaflet CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    /* ── Delhi page overrides ───────────────────────── */
-    .delhi-page-hero {
-      min-height: calc(var(--nav-h) + 200px);
-      display: flex;
-      align-items: flex-end;
-      padding: calc(var(--nav-h) + 3rem) 0 3rem;
-      position: relative;
-      z-index: 1;
-      background: linear-gradient(to bottom, transparent, rgba(11,15,30,.6));
+    /* ── Reset / body ────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #080a10;
+      color: #e8dfc8;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    .delhi-page-hero .container {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .delhi-back {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      transition: color .2s;
-    }
-    .delhi-back:hover { color: var(--accent); }
-    .delhi-page-hero__title {
-      font-family: var(--font-display);
-      font-size: clamp(4rem, 12vw, 9rem);
-      font-weight: 900;
-      line-height: .9;
-      letter-spacing: -.03em;
-      color: var(--text);
-    }
-    .delhi-page-hero__title span { color: var(--accent); }
-    .delhi-page-hero__sub {
-      font-size: .85rem;
-      color: var(--text-dim);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-    .delhi-page-hero__coords {
-      font-family: 'Space Grotesk', monospace;
-      font-size: .72rem;
-      color: rgba(245,230,200,.3);
-      letter-spacing: .14em;
+    a { text-decoration: none; }
+
+    /* ── GTA loading-screen scanlines background ─ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,.18) 2px,
+        rgba(0,0,0,.18) 4px
+      );
+      pointer-events: none;
+      z-index: 9998;
     }
 
-    /* ── Leaflet map wrapper ─────────────────────── */
-    .delhi-map-section {
-      background: var(--bg);
-      padding: 0 0 6rem;
+    /* ── NAV ─────────────────────────────────────── */
+    .nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 999; padding: .9rem 2rem; transition: background .3s; }
+    .nav.scrolled { background: rgba(8,10,16,.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,153,51,.12); }
+    .nav__inner { max-width: 1400px; margin: auto; display: flex; align-items: center; gap: 2rem; }
+    .nav__logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: #ff9933; letter-spacing: .1em; }
+    .nav__links { list-style: none; display: flex; gap: 2rem; margin-left: auto; }
+    .nav__links a { font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(232,223,200,.6); transition: color .2s; }
+    .nav__links a:hover { color: #ff9933; }
+    .nav__links a.active { color: #ff9933; }
+    .nav__back { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(232,223,200,.4); transition: color .2s; display: flex; align-items: center; gap: .4rem; }
+    .nav__back:hover { color: #ff9933; }
+    .nav__burger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+    .nav__burger span { display: block; width: 22px; height: 2px; background: #e8dfc8; transition: all .3s; }
+    @media (max-width: 640px) {
+      .nav__links { display: none; }
+      .nav__burger { display: flex; margin-left: auto; }
+    }
+
+    /* ── HERO ────────────────────────────────────── */
+    .delhi-hero {
+      padding: calc(var(--nav-h, 70px) + 2rem) 2rem 2.5rem;
+      max-width: 1400px;
+      margin: auto;
+    }
+    .delhi-hero__tag {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #ff9933;
+      margin-bottom: .8rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .delhi-hero__tag::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 1.5px;
+      background: #ff9933;
+    }
+    .delhi-hero__title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4.5rem, 14vw, 11rem);
+      line-height: .88;
+      letter-spacing: -.01em;
+      color: #e8dfc8;
+    }
+    .delhi-hero__title .accent { color: #ff9933; }
+    .delhi-hero__title .green { color: #138808; }
+    .delhi-hero__sub {
+      margin-top: 1.2rem;
+      font-size: .82rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(232,223,200,.4);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .delhi-hero__sub span { color: rgba(232,223,200,.2); }
+
+    /* ── MAP WRAPPER: full GTA HUD ───────────────── */
+    .gta-map-section {
+      padding: 0 2rem 5rem;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    /* HUD outer frame */
+    .gta-hud {
       position: relative;
-      z-index: 1;
-    }
-    .delhi-leaflet-wrap {
-      width: min(96%, 1400px);
-      margin-inline: auto;
-      border: 1px solid var(--border);
-      border-radius: 20px;
+      border: 1px solid rgba(255,153,51,.2);
+      border-radius: 4px;
       overflow: hidden;
-      box-shadow: 0 0 80px rgba(255,153,51,.06), 0 0 40px rgba(19,136,8,.04);
+      box-shadow:
+        0 0 0 1px rgba(255,153,51,.08),
+        0 0 60px rgba(255,153,51,.06),
+        0 0 120px rgba(19,136,8,.04),
+        inset 0 0 80px rgba(0,0,0,.5);
     }
+
+    /* Corner accents — GTA radar corners */
+    .gta-hud::before,
+    .gta-hud::after {
+      content: '';
+      position: absolute;
+      width: 20px; height: 20px;
+      border-color: #ff9933;
+      border-style: solid;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .gta-hud::before { top: 0; left: 0; border-width: 2px 0 0 2px; }
+    .gta-hud::after  { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+    .gta-hud__corner-tr,
+    .gta-hud__corner-bl {
+      position: absolute;
+      width: 20px; height: 20px;
+      border-color: #ff9933;
+      border-style: solid;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .gta-hud__corner-tr { top: 0; right: 0; border-width: 2px 2px 0 0; }
+    .gta-hud__corner-bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
+
+    /* HUD top bar */
+    .gta-hud__topbar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 20;
+      background: linear-gradient(to bottom, rgba(8,10,16,.9) 0%, transparent 100%);
+      padding: .7rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+    .gta-hud__location {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: .08em;
+      color: #e8dfc8;
+      text-shadow: 0 0 20px rgba(255,153,51,.5);
+    }
+    .gta-hud__coords {
+      font-family: 'Space Grotesk', monospace;
+      font-size: .65rem;
+      letter-spacing: .12em;
+      color: rgba(232,223,200,.35);
+    }
+    .gta-hud__wanted {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .gta-hud__star {
+      width: 16px; height: 16px;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      background: rgba(255,153,51,.2);
+      border: 1px solid rgba(255,153,51,.25);
+    }
+    .gta-hud__star.active { background: #ff9933; box-shadow: 0 0 8px rgba(255,153,51,.7); border-color: #ff9933; }
+
+    /* CRT scanline overlay on map */
+    .gta-hud__scanlines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0,0,0,.08) 3px,
+        rgba(0,0,0,.08) 4px
+      );
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* Vignette */
+    .gta-hud__vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.7) 100%);
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    /* Map canvas */
     #delhiMap {
-      height: clamp(420px, 65vh, 700px);
+      height: clamp(480px, 72vh, 760px);
       width: 100%;
       background: #080C18;
     }
-
-    /* ── Leaflet default overrides ───────────────── */
-    .leaflet-container {
-      font-family: 'Space Grotesk', sans-serif;
-      background: #080C18;
+    .leaflet-container { font-family: 'Space Grotesk', sans-serif; background: #080C18; }
+    /* GTA-style tile tint */
+    .leaflet-tile-pane {
+      filter: brightness(.55) contrast(1.4) saturate(.4) hue-rotate(180deg);
     }
-    .leaflet-tile-pane { filter: brightness(.92) saturate(.85); }
     .leaflet-control-attribution {
-      background: rgba(11,15,30,.75) !important;
-      color: rgba(245,230,200,.35) !important;
-      font-size: 10px !important;
+      background: rgba(8,10,16,.8) !important;
+      color: rgba(232,223,200,.2) !important;
+      font-size: 9px !important;
     }
-    .leaflet-control-attribution a { color: rgba(255,153,51,.6) !important; }
+    .leaflet-control-attribution a { color: rgba(255,153,51,.4) !important; }
     .leaflet-control-zoom a {
-      background: rgba(17,24,39,.9) !important;
-      color: var(--accent) !important;
-      border-color: rgba(255,153,51,.25) !important;
+      background: rgba(8,10,16,.95) !important;
+      color: #ff9933 !important;
+      border-color: rgba(255,153,51,.2) !important;
+      font-size: .85rem !important;
     }
-    .leaflet-control-zoom a:hover {
-      background: rgba(255,153,51,.15) !important;
-    }
+    .leaflet-control-zoom a:hover { background: rgba(255,153,51,.12) !important; }
 
-    /* ── GTA-style Leaflet markers ───────────────── */
-    .gta-lm { position: relative; width: 36px; height: 36px; }
-    .gta-lm__pulse {
-      position: absolute; inset: 0;
-      border-radius: 50%;
-      background: rgba(19,136,8,.12);
-      border: 1.5px solid #138808;
-      animation: gtaLPulse 2.5s ease-out infinite;
+    /* ── GTA Radar Blip Markers ───────────────────── */
+    .gta-blip {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .gta-lm--hub .gta-lm__pulse {
-      background: rgba(255,153,51,.12);
-      border-color: #FF9933;
-      animation-delay: .5s;
-    }
-    .gta-lm__dot {
+    /* Pulse ring */
+    .gta-blip__ring {
       position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      width: 10px; height: 10px;
+      inset: -6px;
       border-radius: 50%;
-      background: #138808;
-      box-shadow: 0 0 8px rgba(19,136,8,.8);
+      border: 1.5px solid currentColor;
+      opacity: 0;
+      animation: blipPulse 2.2s ease-out infinite;
     }
-    .gta-lm--hub .gta-lm__dot {
-      background: #FF9933;
-      box-shadow: 0 0 10px rgba(255,153,51,.9);
-      width: 13px; height: 13px;
+    .gta-blip__ring2 {
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      opacity: 0;
+      animation: blipPulse 2.2s ease-out infinite .7s;
     }
-    @keyframes gtaLPulse {
-      0%   { transform: scale(1);   opacity: .9; }
-      100% { transform: scale(2.8); opacity: 0;  }
+    @keyframes blipPulse {
+      0%   { transform: scale(.7); opacity: .8; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+    /* Inner icon shape */
+    .gta-blip__icon {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 900;
+      position: relative;
+      z-index: 2;
+      border: 1.5px solid currentColor;
+      box-shadow: 0 0 12px currentColor, 0 0 24px currentColor;
+    }
+    /* Type variants */
+    .gta-blip--main   { color: #ff9933; }
+    .gta-blip--vibe   { color: #ff4d6d; }
+    .gta-blip--temple { color: #c084fc; }
+    .gta-blip--hub    { color: #4ade80; }
+    .gta-blip--hq     { color: #facc15; }
+
+    .gta-blip--main   .gta-blip__icon { background: rgba(255,153,51,.22); }
+    .gta-blip--vibe   .gta-blip__icon { background: rgba(255,77,109,.22); }
+    .gta-blip--temple .gta-blip__icon { background: rgba(192,132,252,.22); }
+    .gta-blip--hub    .gta-blip__icon { background: rgba(74,222,128,.22); }
+    .gta-blip--hq     .gta-blip__icon { background: rgba(250,204,21,.22); }
+
+    /* Star shape for main missions */
+    .gta-blip--main .gta-blip__icon {
+      border-radius: 0;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      border: none;
     }
 
-    /* ── GTA popup ───────────────────────────────── */
+    /* ── GTA Popup ──────────────────────────────────── */
     .leaflet-popup-content-wrapper {
-      background: rgba(11,15,30,.95) !important;
-      border: 1px solid rgba(255,153,51,.3) !important;
-      border-radius: 12px !important;
-      box-shadow: 0 0 30px rgba(255,153,51,.12), 0 8px 32px rgba(0,0,0,.6) !important;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(8,10,16,.97) !important;
+      border: 1px solid rgba(255,153,51,.25) !important;
+      border-radius: 2px !important;
+      box-shadow: 0 0 0 1px rgba(255,153,51,.08), 0 0 40px rgba(255,153,51,.1), 0 16px 48px rgba(0,0,0,.8) !important;
+      backdrop-filter: blur(16px);
       padding: 0 !important;
     }
     .leaflet-popup-tip-container { display: none; }
     .leaflet-popup-close-button {
-      color: rgba(245,230,200,.4) !important;
-      font-size: 18px !important;
-      top: 8px !important; right: 10px !important;
+      color: rgba(232,223,200,.35) !important;
+      font-size: 16px !important;
+      top: 10px !important;
+      right: 12px !important;
+      line-height: 1 !important;
     }
-    .leaflet-popup-close-button:hover { color: var(--accent) !important; }
+    .leaflet-popup-close-button:hover { color: #ff9933 !important; }
+    .leaflet-popup-content { margin: 0 !important; }
+
     .gta-popup {
-      padding: 1.4rem 1.6rem 1.2rem;
-      min-width: 210px;
+      padding: 1.4rem 1.8rem 1.3rem;
+      min-width: 220px;
+      position: relative;
     }
-    .gta-popup__type {
-      font-size: .62rem;
+    .gta-popup__bar {
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      border-radius: 2px 0 0 2px;
+    }
+    .gta-popup__tag {
+      font-size: .58rem;
       font-weight: 700;
-      letter-spacing: .18em;
+      letter-spacing: .22em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: .4rem;
+      margin-bottom: .55rem;
     }
     .gta-popup__name {
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: -.03em;
-      color: var(--text);
-      margin-bottom: .5rem;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      letter-spacing: .04em;
+      font-size: 2rem;
+      letter-spacing: .05em;
+      color: #e8dfc8;
+      line-height: 1;
+      margin-bottom: .65rem;
+    }
+    .gta-popup__name .deva {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 1.4rem;
+      display: block;
+      opacity: .55;
+      letter-spacing: 0;
+      font-weight: 400;
+      margin-top: .1rem;
     }
     .gta-popup__desc {
-      font-size: .78rem;
-      color: var(--text-dim);
-      line-height: 1.5;
+      font-size: .77rem;
+      color: rgba(232,223,200,.55);
+      line-height: 1.55;
     }
     .gta-popup__coords {
-      margin-top: .8rem;
-      font-family: monospace;
-      font-size: .65rem;
-      color: rgba(245,230,200,.25);
-      letter-spacing: .06em;
+      margin-top: .9rem;
+      font-family: 'Space Grotesk', monospace;
+      font-size: .62rem;
+      color: rgba(232,223,200,.22);
+      letter-spacing: .08em;
     }
 
-    /* ── Map legend ──────────────────────────────── */
-    .delhi-legend {
+    /* ── HUD bottom legend bar ─────────────────────── */
+    .gta-legend {
+      background: rgba(8,10,16,.9);
+      border-top: 1px solid rgba(255,153,51,.12);
+      padding: .9rem 1.4rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 1.2rem 2rem;
-      padding: 1.2rem 1.6rem;
-      background: rgba(17,24,39,.6);
-      border-top: 1px solid var(--border);
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--text-dim);
+      gap: .8rem 1.8rem;
       align-items: center;
     }
-    .legend-dot {
-      display: inline-block;
-      width: 9px; height: 9px;
+    .gta-legend__item {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      font-size: .63rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(232,223,200,.4);
+    }
+    .gta-legend__dot {
+      width: 10px; height: 10px;
       border-radius: 50%;
-      margin-right: .4rem;
-      vertical-align: middle;
+      flex-shrink: 0;
+      box-shadow: 0 0 6px currentColor;
+    }
+    .gta-legend__hint {
+      margin-left: auto;
+      font-size: .6rem;
+      letter-spacing: .08em;
+      color: rgba(232,223,200,.2);
+      font-style: italic;
     }
 
-    /* ── Info strip ──────────────────────────────── */
-    .delhi-info-strip {
-      width: min(96%, 1400px);
-      margin: 2rem auto 0;
+    /* ── Stats strip ──────────────────────────────── */
+    .delhi-stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      background: rgba(255,153,51,.1);
+      border: 1px solid rgba(255,153,51,.12);
+      margin-top: 1.2rem;
+      border-radius: 2px;
       overflow: hidden;
     }
-    .delhi-info-card {
-      background: var(--bg-2);
-      padding: 1.4rem 1.6rem;
+    .delhi-stat {
+      background: rgba(8,10,16,.95);
+      padding: 1.2rem 1.5rem;
     }
-    .delhi-info-card__label {
-      font-size: .65rem;
-      letter-spacing: .16em;
+    .delhi-stat__label {
+      font-size: .6rem;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
+      color: #ff9933;
       margin-bottom: .4rem;
-    }
-    .delhi-info-card__val {
-      font-size: 1.15rem;
       font-weight: 700;
-      color: var(--text);
-      letter-spacing: -.02em;
+    }
+    .delhi-stat__val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: .04em;
+      color: #e8dfc8;
+    }
+    @media (max-width: 640px) {
+      .delhi-stats { grid-template-columns: repeat(2, 1fr); }
     }
 
-    @media (max-width: 600px) {
-      .delhi-page-hero { padding-bottom: 2rem; }
-      #delhiMap { height: 380px; }
+    /* ── Footer ──────────────────────────────────── */
+    .delhi-footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(255,153,51,.08);
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(232,223,200,.2);
     }
+    .delhi-footer a { color: #ff9933; opacity: .6; margin: 0 .8rem; transition: opacity .2s; }
+    .delhi-footer a:hover { opacity: 1; }
   </style>
 </head>
 <body>
-
-  <!-- ─── Graph-lines background ───────────────────────── -->
-  <div class="graph-bg graph-bg--saffron" aria-hidden="true"></div>
-  <div class="graph-bg graph-bg--white"   aria-hidden="true"></div>
-  <div class="graph-bg graph-bg--green"   aria-hidden="true"></div>
 
   <!-- ─── NAV ─────────────────────────────────────────── -->
   <nav class="nav" id="navbar">
@@ -261,11 +450,9 @@
       <a href="index.html" class="nav__logo">kalaakaari</a>
       <ul class="nav__links">
         <li><a href="index.html#services">Services</a></li>
-        <li><a href="index.html#industries">Industries</a></li>
         <li><a href="index.html#portfolio">Work</a></li>
-        <li><a href="delhi.html" class="nav__cta">Relive Delhi</a></li>
+        <li><a href="index.html" class="nav__back">← Home</a></li>
       </ul>
-      <button class="nav__lang-toggle" id="delhiLangBtn" title="Coming soon" aria-label="Language toggle" style="opacity:.4;cursor:default">हि</button>
       <button class="nav__burger" id="burger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -273,182 +460,252 @@
   </nav>
 
   <!-- ─── HERO ─────────────────────────────────────────── -->
-  <section class="delhi-page-hero">
-    <div class="container">
-      <a href="index.html" class="delhi-back">← Back to Home</a>
-      <h1 class="delhi-page-hero__title">Relive <span>Delhi</span></h1>
-      <p class="delhi-page-hero__sub">Explore the city. Click a mission marker.</p>
-      <p class="delhi-page-hero__coords">28.6139°N &nbsp;77.2090°E &nbsp;·&nbsp; NEW DELHI · INDIA</p>
-    </div>
+  <section class="delhi-hero">
+    <p class="delhi-hero__tag">Mission Map · New Delhi · India</p>
+    <h1 class="delhi-hero__title">
+      Relive<br>
+      <span class="accent">Del</span><span class="green">hi</span>
+    </h1>
+    <p class="delhi-hero__sub">
+      28.6139°N <span>·</span> 77.2090°E
+      <span>·</span>
+      Click a blip to unlock the mission
+    </p>
   </section>
 
-  <!-- ─── MAP ──────────────────────────────────────────── -->
-  <section class="delhi-map-section">
-    <div class="delhi-leaflet-wrap">
+  <!-- ─── GTA MAP ──────────────────────────────────────── -->
+  <section class="gta-map-section">
+    <div class="gta-hud">
+      <!-- Corner pieces -->
+      <div class="gta-hud__corner-tr"></div>
+      <div class="gta-hud__corner-bl"></div>
+
+      <!-- HUD top bar -->
+      <div class="gta-hud__topbar">
+        <div>
+          <div class="gta-hud__location">NEW DELHI — MISSION AREA</div>
+          <div class="gta-hud__coords" id="liveCoords">28.6139°N &nbsp;77.2090°E</div>
+        </div>
+        <div class="gta-hud__wanted">
+          <div class="gta-hud__star active"></div>
+          <div class="gta-hud__star active"></div>
+          <div class="gta-hud__star active"></div>
+          <div class="gta-hud__star"></div>
+          <div class="gta-hud__star"></div>
+        </div>
+      </div>
+
+      <!-- Scanlines + vignette -->
+      <div class="gta-hud__scanlines"></div>
+      <div class="gta-hud__vignette"></div>
+
+      <!-- Map canvas -->
       <div id="delhiMap"></div>
-      <div class="delhi-legend">
-        <span><i class="legend-dot" style="background:#138808"></i>Landmark</span>
-        <span><i class="legend-dot" style="background:#FF9933"></i>Hub</span>
-        <span><i class="legend-dot" style="background:#3388ff"></i>OpenStreetMap</span>
-        <span style="margin-left:auto;color:rgba(245,230,200,.3);font-size:.65rem;letter-spacing:.06em">Click any marker to unlock the mission</span>
+
+      <!-- Legend bar -->
+      <div class="gta-legend">
+        <div class="gta-legend__item">
+          <div class="gta-legend__dot" style="color:#ff9933;background:#ff9933"></div>
+          Main Mission
+        </div>
+        <div class="gta-legend__item">
+          <div class="gta-legend__dot" style="color:#ff4d6d;background:#ff4d6d"></div>
+          Vibe Zone
+        </div>
+        <div class="gta-legend__item">
+          <div class="gta-legend__dot" style="color:#c084fc;background:#c084fc"></div>
+          Temple
+        </div>
+        <div class="gta-legend__item">
+          <div class="gta-legend__dot" style="color:#4ade80;background:#4ade80"></div>
+          Colony
+        </div>
+        <div class="gta-legend__item">
+          <div class="gta-legend__dot" style="color:#facc15;background:#facc15"></div>
+          Kalaakaari HQ
+        </div>
+        <span class="gta-legend__hint">Drag · Scroll to zoom · Click any blip</span>
       </div>
     </div>
 
-    <div class="delhi-info-strip">
-      <div class="delhi-info-card">
-        <p class="delhi-info-card__label">City</p>
-        <p class="delhi-info-card__val">New Delhi</p>
+    <!-- Stats strip -->
+    <div class="delhi-stats">
+      <div class="delhi-stat">
+        <p class="delhi-stat__label">City</p>
+        <p class="delhi-stat__val">New Delhi</p>
       </div>
-      <div class="delhi-info-card">
-        <p class="delhi-info-card__label">Coordinates</p>
-        <p class="delhi-info-card__val">28.61°N 77.21°E</p>
+      <div class="delhi-stat">
+        <p class="delhi-stat__label">Coordinates</p>
+        <p class="delhi-stat__val">28.61°N</p>
       </div>
-      <div class="delhi-info-card">
-        <p class="delhi-info-card__label">Landmarks</p>
-        <p class="delhi-info-card__val">8 Missions</p>
+      <div class="delhi-stat">
+        <p class="delhi-stat__label">Missions</p>
+        <p class="delhi-stat__val">8 Active</p>
       </div>
-      <div class="delhi-info-card">
-        <p class="delhi-info-card__label">Our Base</p>
-        <p class="delhi-info-card__val">Kalaakaari HQ</p>
+      <div class="delhi-stat">
+        <p class="delhi-stat__label">Our Base</p>
+        <p class="delhi-stat__val">Kalaakaari</p>
       </div>
     </div>
   </section>
 
   <!-- ─── FOOTER ───────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <p class="footer__logo">kalaakaari</p>
-        <p class="footer__copy">© 2025 Kalaakaari. All rights reserved.</p>
-        <div class="footer__socials">
-          <a href="#" aria-label="Instagram">IG</a>
-          <a href="#" aria-label="LinkedIn">LI</a>
-          <a href="#" aria-label="Behance">BE</a>
-        </div>
-      </div>
-    </div>
+  <footer class="delhi-footer">
+    © 2025 Kalaakaari &nbsp;·&nbsp;
+    <a href="index.html">Home</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="#">IG</a>
+    <a href="#">LI</a>
   </footer>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=" crossorigin=""></script>
   <script>
-    /* ── Nav scroll state ──────────────────────────── */
+    /* ── Nav scroll ─────────────────────────── */
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 20);
     }, { passive: true });
 
-    /* ── Mobile burger ─────────────────────────────── */
     const burger = document.getElementById('burger');
     const navLinks = document.querySelector('.nav__links');
-    burger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      const spans = burger.querySelectorAll('span');
-      const open = navLinks.classList.contains('open');
-      spans[0].style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
-      spans[1].style.opacity   = open ? '0' : '1';
-      spans[2].style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
-    });
+    if (burger) burger.addEventListener('click', () => navLinks.classList.toggle('open'));
 
-    /* ── Delhi Leaflet Map ─────────────────────────── */
+    /* ── Map init ───────────────────────────── */
     const map = L.map('delhiMap', {
-      center: [28.6139, 77.2090],
-      zoom: 12,
+      center: [28.6180, 77.2100],
+      zoom: 13,
       zoomControl: true,
       attributionControl: true,
     });
 
-    /* CartoDB Dark Matter — free, no API key */
+    /* CartoDB Dark Matter — dark tactical base */
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 19,
     }).addTo(map);
 
-    /* ── Landmark data ─────────────────────────────── */
-    const landmarks = [
+    /* Live coords in HUD */
+    map.on('mousemove', e => {
+      document.getElementById('liveCoords').textContent =
+        e.latlng.lat.toFixed(4) + '°N  ' + e.latlng.lng.toFixed(4) + '°E';
+    });
+
+    /* ── Blip helper ────────────────────────── */
+    function makeBlip(type) {
+      const symbols = { main: '★', vibe: '♦', temple: '✦', hub: '◉', hq: '⬡' };
+      return L.divIcon({
+        className: '',
+        html: `<div class="gta-blip gta-blip--${type}">
+                 <div class="gta-blip__ring"></div>
+                 <div class="gta-blip__ring2"></div>
+                 <div class="gta-blip__icon">${symbols[type] || '●'}</div>
+               </div>`,
+        iconSize: [30, 30],
+        iconAnchor: [15, 15],
+        popupAnchor: [0, -20],
+      });
+    }
+
+    function makePopup(color, tag, name, nameHi, desc, lat, lng) {
+      return `<div class="gta-popup">
+        <div class="gta-popup__bar" style="background:${color}"></div>
+        <div class="gta-popup__tag" style="color:${color}">${tag}</div>
+        <div class="gta-popup__name">
+          ${name}
+          ${nameHi ? `<span class="deva">${nameHi}</span>` : ''}
+        </div>
+        <div class="gta-popup__desc">${desc}</div>
+        <div class="gta-popup__coords">${lat.toFixed(4)}°N &nbsp;${lng.toFixed(4)}°E</div>
+      </div>`;
+    }
+
+    /* ── Missions ───────────────────────────── */
+    const missions = [
+      /* ── The 4 REQUESTED ── */
       {
-        latlng  : [28.6129, 77.2295],
-        name    : 'India Gate',
-        type    : '★ MAIN MISSION',
-        desc    : 'The eternal flame burns bright. War memorial at the heart of Lutyens\' Delhi.',
-        hub     : false,
+        latlng : [28.5535, 77.2588],
+        type   : 'temple',
+        color  : '#c084fc',
+        tag    : '✦ TEMPLE MISSION',
+        name   : 'Lotus Temple',
+        nameHi : 'कमल मंदिर',
+        desc   : "Delhi's most iconic silhouette. 27 marble petals, all faiths welcome. Silence hits different here.",
       },
       {
-        latlng  : [28.6562, 77.2410],
-        name    : 'Red Fort',
-        type    : '◆ LAL QILA',
-        desc    : '350 years of empire. The city was built around this red sandstone fortress.',
-        hub     : false,
+        latlng : [28.5494, 77.2001],
+        type   : 'vibe',
+        color  : '#ff4d6d',
+        tag    : '◈ VIBE ZONE',
+        name   : 'Hauz Khas',
+        nameHi : 'हौज़ ख़ास',
+        desc   : 'Rooftop cafés, street art, deer park, ancient reservoir. The pulse of New Delhi nightlife.',
       },
       {
-        latlng  : [28.6315, 77.2167],
-        name    : 'Connaught Place',
-        type    : '⬡ THE HUB',
-        desc    : 'CP. The ultimate rendezvous. Business, chai, and culture in one circle.',
-        hub     : true,
+        latlng : [28.7196, 77.2340],
+        type   : 'hub',
+        color  : '#4ade80',
+        tag    : '◉ HIDDEN COLONY',
+        name   : 'Majnu Ka Tila',
+        nameHi : 'माजनू का टीला',
+        desc   : 'Delhi\'s Tibetan quarter. Momos that hit like a final mission. Monks, prayer flags, and chai fog.',
       },
       {
-        latlng  : [28.6506, 77.2304],
-        name    : 'Chandni Chowk',
-        type    : '★ OLD DELHI CHAOS',
-        desc    : 'Oldest market in Asia. Chaos, culture, and the best food you\'ll ever taste.',
-        hub     : false,
+        latlng : [28.6330, 77.2195],
+        type   : 'vibe',
+        color  : '#ff4d6d',
+        tag    : '◈ THE DELHI VIBE',
+        name   : 'Delhi Vibe',
+        nameHi : 'दिल्ली की धड़कन',
+        desc   : 'Central Delhi — CP, Rajpath, power corridors. Where every decision about India gets made.',
+      },
+
+      /* ── Supporting missions ── */
+      {
+        latlng : [28.6129, 77.2295],
+        type   : 'main',
+        color  : '#ff9933',
+        tag    : '★ MAIN MISSION',
+        name   : 'India Gate',
+        nameHi : 'इंडिया गेट',
+        desc   : 'The eternal flame. War memorial at the heart of Lutyens\' Delhi. Zero hour starts here.',
       },
       {
-        latlng  : [28.6127, 77.2773],
-        name    : 'Akshardham',
-        type    : '✦ TEMPLE MISSION',
-        desc    : 'Divine architecture on the banks of the Yamuna. No photography inside.',
-        hub     : false,
+        latlng : [28.6562, 77.2410],
+        type   : 'main',
+        color  : '#ff9933',
+        tag    : '★ LAL QILA',
+        name   : 'Red Fort',
+        nameHi : 'लाल क़िला',
+        desc   : '350 years of empire. The city was built around this red sandstone fortress. Still standing.',
       },
       {
-        latlng  : [28.5244, 77.1855],
-        name    : 'Qutub Minar',
-        type    : '◆ ANCIENT GROUNDS',
-        desc    : '73 metres of history. UNESCO World Heritage. Built in 1193 AD.',
-        hub     : false,
+        latlng : [28.6506, 77.2304],
+        type   : 'vibe',
+        color  : '#ff4d6d',
+        tag    : '◈ OLD DELHI CHAOS',
+        name   : 'Chandni Chowk',
+        nameHi : 'चाँदनी चौक',
+        desc   : 'Oldest market in Asia. Best paranthe, best chaos, most alive street on the planet.',
       },
       {
-        latlng  : [28.5535, 77.2588],
-        name    : 'Lotus Temple',
-        type    : '✦ ICON',
-        desc    : "Delhi's most photogenic landmark. All faiths welcome. No words needed.",
-        hub     : false,
-      },
-      {
-        latlng  : [28.5494, 77.2001],
-        name    : 'Hauz Khas',
-        type    : '◈ VIBE ZONE',
-        desc    : 'Where artists, rappers, and foodies meet. Chai, art, and late nights.',
-        hub     : false,
+        latlng : [28.5735, 77.1855],
+        type   : 'hq',
+        color  : '#facc15',
+        tag    : '⬡ KALAAKAARI HQ',
+        name   : 'Kalaakaari Base',
+        nameHi : 'कलाकारी',
+        desc   : 'Where Delhi\'s creativity meets strategic firepower. We build brands from this base.',
       },
     ];
 
-    /* ── Create custom markers ─────────────────────── */
-    landmarks.forEach(lm => {
-      const hubClass = lm.hub ? ' gta-lm--hub' : '';
-      const icon = L.divIcon({
-        className : '',
-        html      : `<div class="gta-lm${hubClass}"><div class="gta-lm__pulse"></div><div class="gta-lm__dot"></div></div>`,
-        iconSize  : [36, 36],
-        iconAnchor: [18, 18],
-        popupAnchor: [0, -20],
-      });
-
-      const popup = L.popup({ maxWidth: 280, minWidth: 220 }).setContent(`
-        <div class="gta-popup">
-          <div class="gta-popup__type">${lm.type}</div>
-          <div class="gta-popup__name">${lm.name}</div>
-          <div class="gta-popup__desc">${lm.desc}</div>
-          <div class="gta-popup__coords">${lm.latlng[0].toFixed(4)}°N &nbsp;${lm.latlng[1].toFixed(4)}°E</div>
-        </div>
-      `);
-
-      L.marker(lm.latlng, { icon }).addTo(map).bindPopup(popup);
+    missions.forEach(m => {
+      const icon  = makeBlip(m.type);
+      const popup = L.popup({ maxWidth: 300, minWidth: 230 })
+        .setContent(makePopup(m.color, m.tag, m.name, m.nameHi, m.desc, m.latlng[0], m.latlng[1]));
+      L.marker(m.latlng, { icon }).addTo(map).bindPopup(popup);
     });
   </script>
-
-  <script src="js/SplashCursor.js"></script>
 </body>
 </html>
