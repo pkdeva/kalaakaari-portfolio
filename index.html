@@ -6,7 +6,7 @@
   <title>Kalaakaari — Creative Agency</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Yatra+One&family=Big+Shoulders+Display:wght@900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Yatra+One&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -16,33 +16,31 @@
     <div class="nav__inner">
       <a href="#" class="nav__logo">kalaakaari</a>
       <ul class="nav__links">
-        <li><a href="#services"    data-i18n="navServices">Services</a></li>
-        <li><a href="#industries"  data-i18n="navIndustries">Industries</a></li>
-        <li><a href="#portfolio"   data-i18n="navWork">Work</a></li>
-        <li><a href="delhi.html"   data-i18n="navDelhi">Relive Delhi</a></li>
-        <li><a href="#contact" class="nav__cta" data-i18n="navCta">Let's Talk</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#portfolio">Work</a></li>
+        <li><a href="delhi.html">Relive Delhi</a></li>
+        <li><a href="#contact" class="nav__cta">Let's Talk</a></li>
       </ul>
-      <button class="nav__lang-toggle" id="langToggle" title="हिंदी में देखें" aria-label="Language toggle">हि</button>
       <button class="nav__burger" id="burger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- ─── Graph-lines background (tricolor animated) ─── -->
-  <div class="graph-bg graph-bg--saffron" aria-hidden="true"></div>
-  <div class="graph-bg graph-bg--white"   aria-hidden="true"></div>
-  <div class="graph-bg graph-bg--green"   aria-hidden="true"></div>
-
   <!-- ─── HERO ─────────────────────────────────────────── -->
   <section class="hero" id="home">
+    <div class="hero__bg-flow"></div>
+    <div class="hero__bg-mask"></div>
+    
     <div class="hero__content">
-      <p class="hero__eyebrow" data-i18n="heroEyebrow">Delhi-based Creative Agency</p>
+      <p class="hero__eyebrow">Delhi-based Creative Agency</p>
       <h1 class="hero__headline">
+        <span class="hero__brand-deva">कलाकार</span>
         <div class="hero__pressure-wrap" id="heroPressure"></div>
-        <span class="hero__brand"><span class="hero__brand-deva">कला</span><span class="hero__brand-latin">KAARI</span></span>
+        <span class="hero__brand-latin">KALAAKAARI</span>
       </h1>
-      <p class="hero__tagline" data-i18n-html="heroTagline"><span class="hero__tagline-hindi">कलाकार बनो, मिस्त्री नहीं</span> <em>— Be an Artist, Not a Laborer</em></p>
+      <p class="hero__tagline"><em>Be an Artist, Not a Laborer</em> — Turning launches into culture, brands into movements.</p>
       <div class="hero__vibes">
         <span class="vibe-pill">Culture</span>
         <span class="vibe-pill">Rap</span>
@@ -52,15 +50,14 @@
         <span class="vibe-pill">Delhi</span>
       </div>
       <div class="hero__actions">
-        <a href="#portfolio" class="btn btn--primary" data-i18n="heroCta1">See Our Work</a>
-        <a href="#contact"   class="btn btn--ghost"   data-i18n="heroCta2">Get In Touch</a>
+        <a href="#portfolio" class="btn btn--primary">See Our Work</a>
+        <a href="#contact"   class="btn btn--ghost">Get In Touch</a>
       </div>
     </div>
-    <!-- MagnetLines decoration in hero -->
-    <div id="magnetLinesHero" class="hero__magnet" aria-hidden="true"></div>
+    
     <div class="hero__scroll-hint">
       <div class="hero__scroll-line"></div>
-      <span>scroll</span>
+      <span>EXPLORE</span>
     </div>
   </section>
 
@@ -71,44 +68,44 @@
   <section class="section services" id="services">
     <div class="container">
       <div class="section__header reveal">
-        <p class="section__label" data-i18n="svcLabel">What We Do</p>
-        <h2 class="section__title" data-i18n="svcTitle">Our Services</h2>
+        <p class="section__label">What We Do</p>
+        <h2 class="section__title">Our Services</h2>
       </div>
       <div class="services__list">
         <div class="service-row reveal">
           <span class="service-row__num">01</span>
-          <h3 class="service-row__name" data-i18n="svc1">Ad Production</h3>
-          <p class="service-row__desc"   data-i18n="svc1d">High-impact ad creatives that stop the scroll and drive action.</p>
+          <h3 class="service-row__name">Ad Production</h3>
+          <p class="service-row__desc">High-impact ad creatives that stop the scroll and drive action.</p>
         </div>
         <div class="service-row reveal">
           <span class="service-row__num">02</span>
-          <h3 class="service-row__name" data-i18n="svc2">Social Media Management</h3>
-          <p class="service-row__desc"   data-i18n="svc2d">Strategy, scheduling, and community building across all platforms.</p>
+          <h3 class="service-row__name">Social Media Management</h3>
+          <p class="service-row__desc">Strategy, scheduling, and community building across all platforms.</p>
         </div>
         <div class="service-row reveal">
           <span class="service-row__num">03</span>
-          <h3 class="service-row__name" data-i18n="svc3">Scripting</h3>
-          <p class="service-row__desc"   data-i18n="svc3d">Compelling scripts for reels, ads, and video content that convert.</p>
+          <h3 class="service-row__name">Scripting</h3>
+          <p class="service-row__desc">Compelling scripts for reels, ads, and video content that convert.</p>
         </div>
         <div class="service-row reveal">
           <span class="service-row__num">04</span>
-          <h3 class="service-row__name" data-i18n="svc4">Content Production</h3>
-          <p class="service-row__desc"   data-i18n="svc4d">End-to-end content creation — photography, video, and more.</p>
+          <h3 class="service-row__name">Content Production</h3>
+          <p class="service-row__desc">End-to-end content creation — photography, video, and more.</p>
         </div>
         <div class="service-row reveal">
           <span class="service-row__num">05</span>
-          <h3 class="service-row__name" data-i18n="svc5">Graphic Designing</h3>
-          <p class="service-row__desc"   data-i18n="svc5d">Visual identities and assets that make your brand unforgettable.</p>
+          <h3 class="service-row__name">Graphic Designing</h3>
+          <p class="service-row__desc">Visual identities and assets that make your brand unforgettable.</p>
         </div>
         <div class="service-row reveal">
           <span class="service-row__num">06</span>
-          <h3 class="service-row__name" data-i18n="svc6">Branding &amp; Animation</h3>
-          <p class="service-row__desc"   data-i18n="svc6d">Motion graphics and brand systems that bring your story to life.</p>
+          <h3 class="service-row__name">Branding &amp; Animation</h3>
+          <p class="service-row__desc">Motion graphics and brand systems that bring your story to life.</p>
         </div>
         <div class="service-row reveal">
           <span class="service-row__num">07</span>
-          <h3 class="service-row__name" data-i18n="svc7">Performance Marketing</h3>
-          <p class="service-row__desc"   data-i18n="svc7d">Data-driven campaigns optimised for measurable ROI.</p>
+          <h3 class="service-row__name">Performance Marketing</h3>
+          <p class="service-row__desc">Data-driven campaigns optimised for measurable ROI.</p>
         </div>
       </div>
     </div>
@@ -118,8 +115,8 @@
   <section class="section industries" id="industries">
     <div class="container">
       <div class="section__header reveal">
-        <p class="section__label" data-i18n="indLabel">Where We Excel</p>
-        <h2 class="section__title" data-i18n="indTitle">Industries We Serve</h2>
+        <p class="section__label">Where We Excel</p>
+        <h2 class="section__title">Industries We Serve</h2>
       </div>
       <div id="industriesList" class="reveal"></div>
     </div>
@@ -129,7 +126,7 @@
   <section class="section portfolio" id="portfolio">
     <div class="container">
       <div class="section__header reveal">
-        <p class="section__label" data-i18n="portLabel">Our Work</p>
+        <p class="section__label">Our Work</p>
         <div id="trueFocusWrap"></div>
       </div>
       <div class="portfolio__grid">
@@ -179,13 +176,39 @@
     </div>
   </section>
 
+  <!-- ─── DAILY REVIEWS ────────────────────────────────── -->
+  <section class="section daily" id="daily">
+    <div class="daily__map-bg"></div>
+    <div class="daily__map-mask"></div>
+    <div class="container relative">
+      <div class="section__header reveal">
+        <p class="section__label">Daily Check-ins</p>
+        <h2 class="section__title">Reviews &amp; Highlights</h2>
+      </div>
+      <div class="daily__content reveal">
+        <div class="daily__sticker">
+           <p>"Kalaakaari transformed our brand identity overnight!"</p>
+           <span>— Studio XYZ</span>
+        </div>
+        <div class="daily__sticker">
+           <p>"Best creative partners in Delhi. Hands down."</p>
+           <span>— The Local Cafe</span>
+        </div>
+        <div class="daily__sticker">
+           <p>"Incredible video production and scripting. Highly recommended!"</p>
+           <span>— Tech Startup</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── CONTACT ──────────────────────────────────────── -->
   <section class="section contact" id="contact">
     <div class="container">
       <div class="contact__inner">
         <div class="contact__left reveal">
-          <p class="section__label" data-i18n="ctaLabel">Say Hello</p>
-          <h2 class="contact__title" data-i18n-html="ctaTitle">Let's build something<br /><span>amazing together.</span></h2>
+          <p class="section__label">Say Hello</p>
+          <h2 class="contact__title">Let's build something<br /><span>amazing together.</span></h2>
           <div class="contact__details">
             <a href="mailto:business@kalaakaari.in" class="contact__link">
               <span class="contact__link-label">Email</span>
@@ -203,14 +226,14 @@
         </div>
         <form class="contact__form reveal" id="contactForm">
           <div class="form-group">
-            <input type="text" id="name" data-i18n-placeholder="placeName" placeholder="Your Name" required />
+            <input type="text" id="name" placeholder="Your Name" required />
           </div>
           <div class="form-group">
-            <input type="email" id="email" data-i18n-placeholder="placeEmail" placeholder="Email Address" required />
+            <input type="email" id="email" placeholder="Email Address" required />
           </div>
           <div class="form-group">
             <select id="service">
-              <option value="" disabled selected data-i18n="placeService">Service Interested In</option>
+              <option value="" disabled selected>Service Interested In</option>
               <option>Ad Production</option>
               <option>Social Media Management</option>
               <option>Scripting</option>
@@ -221,9 +244,9 @@
             </select>
           </div>
           <div class="form-group">
-            <textarea id="message" rows="4" data-i18n-placeholder="placeMsg" placeholder="Tell us about your project"></textarea>
+            <textarea id="message" rows="4" placeholder="Tell us about your project"></textarea>
           </div>
-          <button type="submit" class="btn btn--primary btn--full" data-i18n="ctaSubmit">Send Message →</button>
+          <button type="submit" class="btn btn--primary btn--full">Send Message →</button>
         </form>
       </div>
     </div>

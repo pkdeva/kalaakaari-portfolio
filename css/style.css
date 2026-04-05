@@ -2,19 +2,24 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #0B0F1E;
-  --bg-2:      #111827;
-  --bg-3:      #1C2438;
-  --text:      #F5E6C8;
-  --text-dim:  #7A7060;
-  --accent:    #FF9933;   /* Saffron */
-  --accent-2:  #138808;   /* India Green */
-  --accent-red:#E63946;   /* Street Red */
-  --border:    rgba(245,230,200,.07);
+  --bg:        #F5F2EB;   /* Premium Beige */
+  --bg-2:      #EBE6D9;
+  --bg-3:      #DFDACB;
+  --text:      #1A1A1A;   /* Charcoal Black */
+  --text-dim:  #666666;
+  --accent:    #C04848;   /* Terracotta Red */
+  --accent-2:  #1A1A1A;
+  --border:    rgba(26,26,26,.15);
+  
+  --hero-text: #F5F2EB;
+  --hero-dim:  rgba(245,242,235,.7);
 
-  --font:         'Space Grotesk', 'Poppins', sans-serif;
-  --font-display: 'Bebas Neue', 'Big Shoulders Display', sans-serif;
+  --font:         'Inter', sans-serif;
+  --font-serif:   'Cormorant Garamond', serif;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-mono:    'Space Mono', monospace;
   --font-hindi:   'Yatra One', serif;
+  
   --ease:     cubic-bezier(.25,.46,.45,.94);
   --ease-out: cubic-bezier(.16,1,.3,1);
 
@@ -70,7 +75,7 @@ ul { list-style: none; }
   color: var(--text);
   border-color: var(--border);
 }
-.btn--ghost:hover { border-color: rgba(240,236,228,.4); }
+.btn--ghost:hover { border-color: rgba(26,26,26,.4); }
 .btn--full { width: 100%; justify-content: center; }
 
 /* ── Nav ───────────────────────────────────────────────── */
@@ -99,9 +104,9 @@ ul { list-style: none; }
   margin-inline: auto;
 }
 .nav__logo {
-  font-size: 1.3rem;
-  font-weight: 800;
-  letter-spacing: -.04em;
+  font-size: 1.4rem;
+  font-family: var(--font-display);
+  letter-spacing: .05em;
   color: var(--text);
 }
 .nav__links {
@@ -110,8 +115,10 @@ ul { list-style: none; }
   gap: 2.5rem;
 }
 .nav__links a {
+  font-family: var(--font-mono);
   font-size: .85rem;
-  font-weight: 500;
+  font-weight: 700;
+  text-transform: uppercase;
   color: var(--text-dim);
   transition: color .2s;
   letter-spacing: .02em;
@@ -119,13 +126,14 @@ ul { list-style: none; }
 .nav__links a:hover { color: var(--text); }
 .nav__cta {
   color: var(--bg) !important;
-  background: var(--accent) !important;
+  background: var(--text) !important;
   padding: .5rem 1.4rem;
   border-radius: 100px;
-  font-weight: 600 !important;
+  font-family: var(--font) !important;
+  font-weight: 500 !important;
   transition: background .2s !important;
 }
-.nav__cta:hover { background: var(--accent-2) !important; color: var(--bg) !important; }
+.nav__cta:hover { background: var(--accent) !important; color: var(--bg) !important; }
 .nav__burger {
   display: none;
   flex-direction: column;
@@ -155,41 +163,44 @@ ul { list-style: none; }
   position: relative;
   padding: calc(var(--nav-h) + 2rem) 1rem 6rem;
   overflow: hidden;
+  background: #111;
 }
 
-/* Subtle dot-grid background */
-.hero::before {
-  content: '';
+/* Background Flow */
+.hero__bg-flow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200%;
+  background: url('../assets/images/skyline_bg.png') repeat-x left center;
+  background-size: cover;
+  animation: heroFlow 60s linear infinite;
+  z-index: 0;
+}
+@keyframes heroFlow {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Mask for readability */
+.hero__bg-mask {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(240,236,228,.06) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(17,17,17,0.7) 0%, rgba(17,17,17,0.3) 50%, rgba(17,17,17,0.85) 100%);
+  z-index: 1;
 }
 
-/* Radial glow behind headline — tricolor radial */
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(255,153,51,.08) 0%, rgba(19,136,8,.04) 50%, transparent 70%);
-  pointer-events: none;
-}
-
-
-.hero__content { position: relative; z-index: 1; }
+.hero__content { position: relative; z-index: 2; width: 100%; max-width: 1000px; }
 
 .hero__eyebrow {
   display: inline-flex;
   align-items: center;
   gap: .7rem;
-  font-size: .75rem;
-  font-weight: 500;
-  letter-spacing: .18em;
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .15em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 2.2rem;
@@ -205,11 +216,7 @@ ul { list-style: none; }
 }
 
 .hero__headline {
-  font-size: clamp(3rem, 9vw, 8rem);
-  font-weight: 900;
-  line-height: 1.0;
-  letter-spacing: -.05em;
-  color: var(--text);
+  position: relative;
   margin-bottom: 1rem;
 }
 
@@ -218,45 +225,43 @@ ul { list-style: none; }
   width: 100%;
   height: clamp(3rem, 8vw, 7rem);
   margin-bottom: .5rem;
+  display: none; /* Hide old pressure wrap in favor of native text */
 }
 
-.hero__brand {
-  display: block;
-  -webkit-text-stroke: 2px var(--accent);
-  color: transparent;
-  font-size: clamp(5rem, 18vw, 16rem);
-  line-height: .85;
-  margin-bottom: 1.5rem;
-}
 .hero__brand-deva {
+  display: block;
   font-family: var(--font-hindi);
-  font-weight: 400;
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: .9;
+  color: rgba(245,242,235,0.15); /* very subtle back text */
+  margin-bottom: -1rem;
   letter-spacing: .02em;
 }
+
 .hero__brand-latin {
+  display: block;
   font-family: var(--font-display);
-  font-weight: 900;
+  font-size: clamp(4.5rem, 16vw, 12rem);
+  line-height: .85;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
-  letter-spacing: .01em;
+  letter-spacing: .02em;
 }
 
 .hero__tagline {
-  font-size: clamp(.9rem, 2vw, 1.15rem);
-  color: var(--text-dim);
-  margin-bottom: 1.8rem;
-  font-weight: 300;
-  letter-spacing: .02em;
-}
-.hero__tagline-hindi {
-  font-family: var(--font-hindi);
-  font-size: 1.3em;
-  color: var(--text);
-  letter-spacing: .02em;
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--hero-dim);
+  margin-bottom: 2rem;
+  font-weight: 400;
+  max-width: 700px;
+  margin-inline: auto;
 }
 .hero__tagline em {
-  font-style: normal;
-  color: var(--accent);
-  font-weight: 500;
+  font-style: italic;
+  color: var(--hero-text);
+  font-weight: 600;
 }
 
 /* ── Hero vibes pills ──────────────────────────────────── */
@@ -796,6 +801,65 @@ ul { list-style: none; }
   top: 0; left: 0;
   pointer-events: none;
   box-sizing: content-box;
+}
+
+/* ── Daily Reviews ─────────────────────────────────────── */
+.daily {
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+.daily__map-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../assets/images/map_bg.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.15;
+  filter: grayscale(1);
+  pointer-events: none;
+}
+.daily__map-mask {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--bg) 0%, rgba(245,242,235,0.7) 50%, var(--bg) 100%);
+  pointer-events: none;
+}
+.daily .container { position: relative; z-index: 1; }
+.daily__content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.daily__sticker {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.05); /* Stamp look */
+  position: relative;
+  transition: transform .2s;
+}
+.daily__sticker:hover { transform: translateY(-4px); }
+.daily__sticker p {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+.daily__sticker span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 .corner {
