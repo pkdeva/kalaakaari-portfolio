@@ -15,10 +15,11 @@
   --hero-text: #F0E4CC;
   --hero-dim:  rgba(240,228,204,.7);
 
+  /* Architecture: Playfair Display & DM Sans */
   --font:         'DM Sans', sans-serif;
-  --font-serif:   'Cormorant Garamond', serif;
+  --font-serif:   'Playfair Display', serif;
   --font-display: 'Playfair Display', serif;
-  --font-mono:    'Space Mono', monospace;
+  --font-mono:    'DM Sans', sans-serif;
   --font-hindi:   'Noto Sans Devanagari', serif;
 
   --ease:     cubic-bezier(.25,.46,.45,.94);
@@ -928,7 +929,7 @@ ul { list-style: none; }
 .marker-dot--gold { fill: #d4aa4c; }
 
 .marker-label {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: .06em;
@@ -937,7 +938,7 @@ ul { list-style: none; }
   pointer-events: none;
 }
 .marker-sublabel {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 8.5px;
   letter-spacing: .09em;
   fill: rgba(212,170,76,0);

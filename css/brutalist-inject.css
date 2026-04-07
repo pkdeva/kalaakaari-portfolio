@@ -200,7 +200,7 @@ h1, h2, h3, .about__headline em {
 .footer { background: var(--surface-container-lowest) !important; border-top: 1px solid var(--outline-variant) !important; }
 
 /* ── Noto Devanagari font utility ── */
-.deva { font-family: 'Noto Sans Devanagari', 'Yatra One', serif; }
+.deva { font-family: 'Noto Sans Devanagari', serif; }
 
 /* ── Nav controls (holds toggle + burger) ── */
 .nav__controls {
@@ -243,7 +243,7 @@ h1, h2, h3, .about__headline em {
   border: 1px solid var(--outline-variant);
   padding: 0.3rem 0.7rem;
   cursor: pointer;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -273,7 +273,7 @@ h1, h2, h3, .about__headline em {
 /* ── Hero: Devanagari subtitle under KALAKARI ── */
 .hero-deva-sub {
   display: block;
-  font-family: 'Noto Sans Devanagari', 'Yatra One', serif;
+  font-family: 'Noto Sans Devanagari', serif;
   font-size: clamp(1.8rem, 5vw, 4rem);
   font-weight: 700;
   color: rgba(200, 145, 46, 0.18);
@@ -294,7 +294,7 @@ h1, h2, h3, .about__headline em {
 }
 .hh-word {
   position: absolute;
-  font-family: 'Noto Sans Devanagari', 'Yatra One', serif;
+  font-family: 'Noto Sans Devanagari', serif;
   font-weight: 900;
   color: rgba(200, 145, 46, 0.035);
   line-height: 1;
@@ -311,7 +311,7 @@ h1, h2, h3, .about__headline em {
 
 /* ── Section label Devanagari suffix ── */
 .section__label-deva {
-  font-family: 'Noto Sans Devanagari', 'DM Sans', serif;
+  font-family: 'Noto Sans Devanagari', var(--font), serif;
   font-size: 1em;
   font-weight: 700;
   letter-spacing: inherit;
@@ -383,7 +383,7 @@ h1, h2, h3, .about__headline em {
 .bp-kaari-part { color: var(--on-surface-variant); opacity: 0.55; }
 
 .bp-deva-big {
-  font-family: 'Noto Sans Devanagari', 'Yatra One', serif;
+  font-family: 'Noto Sans Devanagari', serif;
   font-size: clamp(2.5rem, 7vw, 4rem);
   font-weight: 900;
   color: var(--primary-container);
@@ -391,7 +391,7 @@ h1, h2, h3, .about__headline em {
   margin-bottom: 0.2rem;
 }
 .bp-roman {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -411,14 +411,14 @@ h1, h2, h3, .about__headline em {
 }
 .brand-panel__part { display: flex; flex-direction: column; gap: 0.3rem; flex: 1; }
 .bpart-deva {
-  font-family: 'Noto Sans Devanagari', 'Yatra One', serif;
+  font-family: 'Noto Sans Devanagari', serif;
   font-size: 2rem;
   font-weight: 700;
   color: var(--on-surface-variant);
   line-height: 1;
 }
 .bpart-roman {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -463,7 +463,7 @@ h1, h2, h3, .about__headline em {
   margin-bottom: 2rem;
 }
 .brand-panel__tags span {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -478,7 +478,7 @@ h1, h2, h3, .about__headline em {
 }
 
 .brand-panel__coords {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.06em;
   color: var(--outline);
@@ -811,7 +811,7 @@ h1, h2, h3, .about__headline em {
   margin-bottom: 1rem;
 }
 .footer__coords {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   color: var(--outline);
@@ -870,7 +870,7 @@ h1, h2, h3, .about__headline em {
   right: -4%;
   top: 50%;
   transform: translateY(-50%);
-  font-family: 'Noto Sans Devanagari', 'Yatra One', serif;
+  font-family: 'Noto Sans Devanagari', serif;
   font-weight: 900;
   font-size: clamp(14rem, 28vw, 26rem);
   color: rgba(65, 57, 49, 0.16);
@@ -981,7 +981,7 @@ h1, h2, h3, .about__headline em {
   right: -3rem;
   top: 50%;
   transform: translateY(-50%);
-  font-family: 'Noto Sans Devanagari', 'Yatra One', serif;
+  font-family: 'Noto Sans Devanagari', serif;
   font-weight: 900;
   font-size: clamp(10rem, 24vw, 21rem);
   line-height: 1;
@@ -1345,7 +1345,7 @@ h1, h2, h3, .about__headline em {
   gap: 1.5rem;
   text-decoration: none;
   color: var(--on-surface, #F5F2EB);
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-headline);
   font-size: clamp(1.5rem, 3.2vw, 2.2rem);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1355,7 +1355,7 @@ h1, h2, h3, .about__headline em {
 }
 
 .fm-item__num {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.05em;
   color: #C8912E;
@@ -1368,7 +1368,7 @@ h1, h2, h3, .about__headline em {
 }
 
 .fm-item__sub {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font);
   font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -1416,7 +1416,7 @@ h1, h2, h3, .about__headline em {
   padding: 0 2rem;
   gap: 1.5rem;
   color: #1a1208;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-headline);
   font-size: clamp(1.5rem, 3.2vw, 2.2rem);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1461,7 +1461,7 @@ h1, h2, h3, .about__headline em {
   border: none;
   cursor: pointer;
   padding: 0;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-headline);
   font-size: 1.45rem;
   letter-spacing: 0.1em;
   line-height: 1;
@@ -1487,7 +1487,7 @@ h1, h2, h3, .about__headline em {
 [data-lang="hi"] .logo-hi,
 [data-lang="hi"] .logo-x,
 [data-lang="hi"] .logo-en-half   { display: inline; }
-[data-lang="hi"] .logo-hi        { font-family: 'Noto Sans Devanagari', sans-serif; font-size: 1.25rem; }
+[data-lang="hi"] .logo-hi        { font-family: 'Noto Sans Devanagari', serif; font-size: 1.25rem; }
 
 /* Center: lang toggle */
 .nav__center {
@@ -1519,7 +1519,7 @@ h1, h2, h3, .about__headline em {
 .nav__drop-btn {
   display: block;
   padding: 0.45rem 1rem;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -1664,7 +1664,7 @@ h1, h2, h3, .about__headline em {
 
 .side-drawer__eyebrow {
   display: block;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.62rem;
   letter-spacing: 0.2em;
   color: #C8912E;
@@ -1678,7 +1678,7 @@ h1, h2, h3, .about__headline em {
   gap: 0;
 }
 .side-drawer__nav a {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-headline);
   font-size: 1.6rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1709,7 +1709,7 @@ h1, h2, h3, .about__headline em {
   padding: 0.6rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1726,7 +1726,7 @@ h1, h2, h3, .about__headline em {
 [data-theme="light"] .side-drawer__meta .theme-toggle .tt-dark  { display: none !important; }
 
 .side-drawer__delhi-link {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1741,7 +1741,7 @@ h1, h2, h3, .about__headline em {
   position: absolute;
   bottom: -1rem;
   right: -0.5rem;
-  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-family: 'Noto Sans Devanagari', serif;
   font-size: 9rem;
   font-weight: 900;
   color: rgba(200,145,46,0.04);
@@ -1770,7 +1770,7 @@ h1, h2, h3, .about__headline em {
   justify-content: center;
   text-align: center;
   text-decoration: none;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.55rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -1842,7 +1842,7 @@ h1, h2, h3, .about__headline em {
 /* "This Is" — Cormorant italic intro, clearly smaller */
 .hero-this-is {
   display: block !important;
-  font-family: 'Cormorant Garamond', serif !important;
+  font-family: var(--font-headline) !important;
   font-size: clamp(1.3rem, 2.8vw, 2.4rem) !important;
   font-weight: 400 !important;
   font-style: italic !important;
@@ -1972,7 +1972,7 @@ h1, h2, h3, .about__headline em {
   padding: 0.6rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -2210,7 +2210,7 @@ h1, h2, h3, .about__headline em {
   position: absolute;
   top: -0.5rem;
   left: 1rem;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-headline);
   font-size: 9rem;
   font-weight: 700;
   line-height: 1;
@@ -2257,7 +2257,7 @@ h1, h2, h3, .about__headline em {
 
 /* ── 9. TESTIMONIAL PULL-QUOTE STYLE ── */
 .daily__sticker p {
-  font-family: 'Cormorant Garamond', serif !important;
+  font-family: var(--font-headline) !important;
   font-style: italic !important;
   font-size: 1.05rem !important;
   line-height: 1.75 !important;
@@ -2265,7 +2265,7 @@ h1, h2, h3, .about__headline em {
   letter-spacing: 0.01em !important;
 }
 .daily__sticker span {
-  font-family: 'Space Mono', monospace !important;
+  font-family: var(--font-mono) !important;
   font-size: 0.6rem !important;
   letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
@@ -2309,7 +2309,7 @@ h1, h2, h3, .about__headline em {
 
 /* ── 11. FOOTER LOGO: Alata + italic treatment ── */
 .footer__logo {
-  font-family: 'Alata', sans-serif !important;
+  font-family: var(--font) !important;
   font-style: normal !important;
   font-weight: 400 !important;
   font-size: 1.9rem !important;
@@ -2328,7 +2328,7 @@ h1, h2, h3, .about__headline em {
 .bento-card__tag,
 .footer__col-title,
 .side-drawer__eyebrow {
-  font-family: 'Alata', sans-serif !important;
+  font-family: var(--font) !important;
   letter-spacing: 0.32em !important;
 }
 
@@ -2343,36 +2343,36 @@ h1, h2, h3, .about__headline em {
 .footer__links li a,
 .footer__links li span,
 .footer__socials a {
-  font-family: 'Alata', sans-serif !important;
+  font-family: var(--font) !important;
 }
 
 /* Nav links — Alata */
 .nav__item a,
 .nav__drop-btn,
 .nav__dropdown a {
-  font-family: 'Alata', sans-serif !important;
+  font-family: var(--font) !important;
   letter-spacing: 0.1em !important;
 }
 
 /* Side drawer nav — Alata */
 .side-drawer__nav a {
-  font-family: 'Alata', sans-serif !important;
+  font-family: var(--font) !important;
   font-size: 1.4rem !important;
   letter-spacing: 0.08em !important;
 }
 
 /* Stats label — already inherits but force Alata */
-.stat-label { font-family: 'Alata', sans-serif !important; }
+.stat-label { font-family: var(--font) !important; }
 
 /* Testimonials quote text — keep Cormorant for elegance */
 /* (already set above to Cormorant) */
 
 /* Typewriter — Cormorant italic */
-.hero-typewriter { font-family: 'Cormorant Garamond', serif !important; }
+.hero-typewriter { font-family: var(--font-headline) !important; }
 
 /* ── 13. ABOUT HEADLINE: Cormorant italic for THE ── */
 .about__headline {
-  font-family: 'Epilogue', sans-serif !important;
+  font-family: var(--font) !important;
 }
 
 /* Thin amber rule below "THE KALAKARS." */
@@ -2441,7 +2441,7 @@ body::before { z-index: 99997 !important; }
 }
 
 .truth-divider__en {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-headline);
   font-style: italic;
   font-size: clamp(0.9rem, 2vw, 1.15rem);
   font-weight: 400;
