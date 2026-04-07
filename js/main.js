@@ -433,3 +433,36 @@ if (tfWrap) {
     pauseBetweenAnimations: 2,
   });
 }
+
+/* ── Smooth Scroll (Lenis) ──────────────────────────────── */
+(function() {
+  if (typeof Lenis !== 'undefined') {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }
+})();
+
+/* ── Magnetic Floating Buttons ──────────────────────────── */
+(function() {
+  const magnets = document.querySelectorAll('.float-btn');
+  magnets.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.1)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+})();
