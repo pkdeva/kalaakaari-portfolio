@@ -67,7 +67,10 @@ class AnimatedList {
 
   _bindKeys() {
     if (!this.enableArrowNavigation) return;
-    document.addEventListener('keydown', e => {
+    // Make the list container focusable
+    this.container.setAttribute('tabindex', '0');
+    // Only capture arrow keys when the list itself is focused — not globally
+    this.container.addEventListener('keydown', e => {
       if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return;
       e.preventDefault();
       this._select(this.selectedIndex + (e.key === 'ArrowDown' ? 1 : -1));

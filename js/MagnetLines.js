@@ -10,6 +10,7 @@ class MagnetLines {
     this.baseAngle     = options.baseAngle     !== undefined ? options.baseAngle : -10;
     this.containerSize = options.containerSize || '80vmin';
 
+    this._pendingRAF = null;
     this._build(container);
     this._bindEvents();
     this._initDefault();
@@ -48,7 +49,17 @@ class MagnetLines {
   }
 
   _bindEvents() {
-    window.addEventListener('pointermove', e => this._rotate(e.clientX, e.clientY));
+    window.addEventListener('pointermove', e => {
+      // Throttle: only queue one rAF at a time to prevent layout thrashing
+      if (this._pendingRAF) return;
+      this._pendingRAF = requestAnimationFrame(() => {
+        this._pendingRAF = null;
+        // Skip entirely if the container is off-screen
+        const rect = this.el.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        this._rotate(e.clientX, e.clientY);
+      });
+    }, { passive: true });
   }
 
   _initDefault() {
@@ -61,3 +72,4 @@ class MagnetLines {
     });
   }
 }
+

@@ -62,7 +62,8 @@
 
 /* ── Base ──────────────────────────────────────────────────── */
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior handled by Lenis — do NOT set scroll-behavior: smooth
+     here, as the two smooth-scroll systems fight each other and cause jitter */
   font-size: 16px;
 }
 body {

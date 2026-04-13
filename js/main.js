@@ -448,6 +448,18 @@ if (tfWrap) {
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
+
+    // Route anchor-link clicks through Lenis so they don't bypass smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const target = anchor.getAttribute('href');
+        if (!target || target === '#') return;
+        const el = document.querySelector(target);
+        if (!el) return;
+        e.preventDefault();
+        lenis.scrollTo(el, { offset: 0 });
+      });
+    });
   }
 })();
 
