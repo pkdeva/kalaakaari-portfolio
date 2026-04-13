@@ -377,6 +377,16 @@ ul  { list-style: none; }
   transition: opacity .2s ease, transform .2s ease;
   z-index: 200;
 }
+/* Invisible bridge that covers the 8px gap so the cursor doesn't
+   trigger mouseleave when moving from the button to the dropdown */
+.nav__dropdown::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
 .nav__item--drop:hover .nav__dropdown,
 .nav__item--drop.open  .nav__dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
 
