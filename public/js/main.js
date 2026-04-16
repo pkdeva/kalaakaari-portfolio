@@ -82,17 +82,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-/* ── MagnetLines (hero decoration) ────────────────────── */
-const _mlEl = document.getElementById('magnetLinesHero');
-if (_mlEl) new MagnetLines(_mlEl, {
-  rows          : 7,
-  columns       : 7,
-  lineColor     : '#C8912E',
-  lineWidth     : '1.5px',
-  lineHeight    : '22px',
-  baseAngle     : 0,
-  containerSize : '260px',
-});
+
 
 /* ── Custom Cursor ──────────────────────────────────────── */
 (function () {
