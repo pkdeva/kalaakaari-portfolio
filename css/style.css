@@ -414,7 +414,7 @@ ul  { list-style: none; }
 
 /* Burger */
 .nav__burger {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 5px;
   background: none;
