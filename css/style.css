@@ -41,7 +41,7 @@
   --ease-out: cubic-bezier(.16,1,.3,1);
 
   /* Layout */
-  --nav-h: 72px;
+  --nav-h: 66px;
 }
 
 /* ── Light Mode ────────────────────────────────────────────── */
@@ -235,9 +235,9 @@ ul  { list-style: none; }
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
   height: 100%;
-  width: min(90%, 1200px);
+  width: min(94%, 1300px);
   margin-inline: auto;
 }
 
@@ -256,24 +256,31 @@ ul  { list-style: none; }
   align-items: center;
   gap: 0.15em;
 }
-.logo-hi   { color: var(--accent); display: none; }
-.logo-x    { color: rgba(200,145,46,.4); font-size: .9em; display: none; }
+.logo-hi { 
+  color: var(--accent); 
+  display: none; 
+  font-family: var(--font-hindi); 
+  font-size: 1.25rem; 
+}
+.logo-x { 
+  color: rgba(200,145,46,.4); 
+  font-size: .9em; 
+  display: none; 
+}
 .logo-en-half { color: var(--text); display: none; }
-.logo-full { color: var(--text); display: inline; }
+.logo-full { color: var(--text); display: inline-block; }
 
-[data-lang="en"] .logo-full                        { display: inline; }
-[data-lang="en"] .logo-hi, [data-lang="en"] .logo-x,
-[data-lang="en"] .logo-en-half                     { display: none; }
+/* In both languages, default to KALAAKAARI, and show [कला x KAARI] on hover */
+.brand-hover-swap:hover .logo-full { display: none !important; }
+.brand-hover-swap:hover .logo-hi,
+.brand-hover-swap:hover .logo-x,
+.brand-hover-swap:hover .logo-en-half { display: inline-block !important; }
 
-[data-lang="hi"] .logo-full                        { display: none; }
-[data-lang="hi"] .logo-hi, [data-lang="hi"] .logo-x,
-[data-lang="hi"] .logo-en-half                     { display: inline; }
-[data-lang="hi"] .logo-hi { font-family: var(--font-hindi); font-size: 1.25rem; }
-
-.nav__logo-btn:hover .logo-full,
-.nav__logo-btn:hover .logo-en-half { color: var(--accent); transition: color .2s; }
+.nav__logo-btn:hover .logo-en-half, 
+.brand-hover-swap:hover .logo-en-half { color: var(--accent); transition: color .2s; }
 [data-theme="light"] .nav__logo-btn .logo-full,
 [data-theme="light"] .nav__logo-btn .logo-en-half  { color: var(--text); }
+[data-theme="light"] .nav__logo-btn:hover .logo-en-half { color: var(--accent); }
 
 /* Center: lang toggle */
 .nav__center { display: flex; justify-content: center; }
@@ -420,11 +427,11 @@ ul  { list-style: none; }
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 2px;
 }
 .nav__burger span {
   display: block;
-  width: 22px;
+  width: 20px;
   height: 1.5px;
   background: var(--text);
   border-radius: 2px;
@@ -433,7 +440,7 @@ ul  { list-style: none; }
 @media (max-width: 768px) {
   .nav__links  { display: none; }
   .nav__burger { display: flex; }
-  .nav__logo-btn { font-size: 1.15rem; }
+  .nav__logo-btn { font-size: 1.05rem; }
 }
 @media (max-width: 480px) {
   .nav__center { display: none; }
@@ -447,7 +454,7 @@ ul  { list-style: none; }
   position: fixed;
   top: 0; right: 0;
   height: 100vh;
-  width: min(380px, 90vw);
+  width: min(350px, 85vw);
   background: #0b0906;
   border-left: 1px solid rgba(200,145,46,.15);
   z-index: 1001;
@@ -455,7 +462,7 @@ ul  { list-style: none; }
   transition: transform .5s cubic-bezier(.76,0,.24,1);
   display: flex;
   flex-direction: column;
-  padding: 5.5rem 2.5rem 2.5rem;
+  padding: 4.5rem 2rem 2rem;
   overflow-y: auto;
 }
 .side-drawer.open       { transform: translateX(0); }
@@ -473,7 +480,7 @@ ul  { list-style: none; }
 
 .side-drawer__close {
   position: absolute;
-  top: 1.5rem; right: 1.5rem;
+  top: 1.8rem; right: 1.8rem;
   background: none;
   border: 1px solid rgba(200,145,46,.25);
   color: rgba(245,242,235,.6);
@@ -486,7 +493,7 @@ ul  { list-style: none; }
 }
 .side-drawer__close:hover { color: var(--accent); border-color: var(--accent); }
 
-.side-drawer__content { flex: 1; display: flex; flex-direction: column; gap: 2rem; }
+.side-drawer__content { flex: 1; display: flex; flex-direction: column; gap: 1.5rem; }
 
 .side-drawer__eyebrow {
   display: block;
@@ -500,12 +507,12 @@ ul  { list-style: none; }
 .side-drawer__nav { display: flex; flex-direction: column; gap: 0; }
 .side-drawer__nav a {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: rgba(245,242,235,.5);
   text-decoration: none;
-  padding: .3rem 0;
+  padding: .25rem 0;
   border-bottom: 1px solid rgba(200,145,46,.07);
   transition: color .2s, padding-left .2s;
 }
@@ -869,6 +876,28 @@ ul  { list-style: none; }
   font-style: normal;
 }
 [data-theme="light"] .hero-brand-text { color: #8B5E1A; }
+
+/* Hero independent text layout for hover swapping */
+.hero-hover-parts { display: none; }
+.hero-hover-full { display: inline-block; }
+
+.hero-custom-swap:hover .hero-hover-full { display: none !important; }
+.hero-custom-swap:hover .hero-hover-parts { display: inline-block !important; }
+
+.hero-hover-parts .h-hi {
+  font-family: var(--font-hindi);
+  font-size: 0.85em;      /* Scaled safely inside hero parent */
+  margin-right: 0.1em;
+}
+.hero-hover-parts .h-x {
+  color: rgba(200,145,46,.4);
+  font-size: 0.7em;
+  vertical-align: middle;
+  margin-right: 0.1em;
+}
+.hero-hover-parts .h-en {
+  color: inherit;
+}
 
 /* Devanagari ghost below KALAAKAARI */
 .hero-deva-sub {
